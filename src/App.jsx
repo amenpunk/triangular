@@ -9,8 +9,8 @@ function App() {
     let poly;
     let map;
     var service;
-    var infowindow;
     var geocoder;
+    var circle;
 
     const getCities = (geo) => {
 
@@ -30,7 +30,7 @@ function App() {
     }
 
     const loader = new Loader({
-        apiKey: "AIzaSyDDC40kXl_n7Ry4vOqr-PJORGJC1Jo6GKI",
+        apiKey: "",
         version: "weekly",
     });
 
@@ -39,7 +39,7 @@ function App() {
 
     const Circle = (xy) => {
 
-        const cityCircle = new google.maps.Circle({
+        circle = new google.maps.Circle({
             strokeColor: "#FF0000",
             strokeOpacity: 0.8,
             strokeWeight: 2,
@@ -49,6 +49,8 @@ function App() {
             center: xy,
             radius: 1000 * 10,
         });
+        
+
     }
 
     const rectagle = () => {
@@ -104,6 +106,10 @@ function App() {
             lng: xy.lng()
         }
         console.log("GEO : ", center)
+
+        if(circle){
+            circle.setMap(null);
+        }
 
         Circle(center);
         getCities(center);
@@ -175,7 +181,7 @@ function App() {
             map = new google.maps.Map(mapRef.current, {
                 mapTypeId: "terrain",
                 center: start,
-                zoom: 12,
+                zoom: 9,
                 disableDefaultUI: true,
             });
 
