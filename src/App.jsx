@@ -48,8 +48,18 @@ function App() {
             map,
             center: xy,
             radius: 1000 * 10,
+            editable: true,
+            // draggable: true,
         });
         
+        google.maps.event.addListener(circle, 'radius_changed', function() {
+            console.log("RADIO CAMBIO :",circle.getRadius());
+            console.log(circle);
+        });
+
+        google.maps.event.addListener(circle, 'center_changed', function() {
+            console.log("NUEVO RADIO :", circle.getRadius() );
+        });
 
     }
 
